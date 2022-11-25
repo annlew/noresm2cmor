@@ -218,26 +218,27 @@ c
 c --- Tables 
       LOGICAL, SAVE :: 
      .  dfx,damon,domon,doimon,daero,dday,d6hrlev,d6hrlevi,d6hrplev,
-     .  d3hr,d3hri,dlmon,dlimon,doyr,doyrbgc,domonbgc
+     .  d3hr,d3hri,dlmon,dlimon,doyr,doyrbgc,domonbgc,dramon
       CHARACTER(len=lenmax),DIMENSION(colmax,rowmax), SAVE :: 
      .  vfx,vamon,vomon,voimon,vaero,vday,v6hrlev,v6hrlevi,v6hrplev,
-     .  v3hr,v3hri,vlmon,vlimon,voyr,voyrbgc,vomonbgc
+     .  v3hr,v3hri,vlmon,vlimon,voyr,voyrbgc,vomonbgc,vramon
       CHARACTER(len=slenmax), SAVE ::
      .  pfx,pamon,pomon,poimon,paero,pday,p6hrlev,p6hrlevi,p6hrplev,
-     .  p3hr,p3hri,plmon,plimon,poyr,poyrbgc,pomonbgc
+     .  p3hr,p3hri,plmon,plimon,poyr,poyrbgc,pomonbgc,pramon
       CHARACTER(len=slenmax), SAVE ::
      .  tfx,tamon,tomon,toimon,taero,tday,t6hrlev,t6hrlevi,t6hrplev,
-     .  t3hr,t3hri,tlmon,tlimon,toyr,toyrbgc,tomonbgc,tgrids
+     .  t3hr,t3hri,tlmon,tlimon,toyr,toyrbgc,tomonbgc,tgrids,tramon
       INTEGER, SAVE :: 
      .  nfx,namon,nomon,noimon,naero,nday,n6hrlev,n6hrlevi,n6hrplev,
-     .  n3hr,n3hri,nlmon,nlimon,noyr,noyrbgc,nomonbgc
+     .  n3hr,n3hri,nlmon,nlimon,noyr,noyrbgc,nomonbgc,nramon
       INTEGER, SAVE :: 
      .  rfx,ramon,romon,roimon,raero,rday,r6hrlev,r6hrlevi,r6hrplev,
      .  r3hr,r3hri,
-     .  rlmon,rlimon,royr,royrbgc,romonbgc
+     .  rlmon,rlimon,royr,royrbgc,romonbgc,rramon
       NAMELIST /table_grids/   tgrids
       NAMELIST /table_fx/      dfx,pfx,tfx,vfx
       NAMELIST /table_amon/    damon,pamon,tamon,ramon,vamon
+      NAMELIST /table_ramon/   dramon,pramon,tramon,rramon,vramon
       NAMELIST /table_aero/    daero,paero,taero,raero,vaero
       NAMELIST /table_oyr/     doyr,poyr,toyr,royr,voyr
       NAMELIST /table_oyrbgc/  doyrbgc,poyrbgc,toyrbgc,royrbgc,voyrbgc
@@ -677,6 +678,7 @@ c
       tomonbgc      = 'CMIP6_Omon.json'
       toimon        = 'CMIP6_OImon.json'
       tamon         = 'CMIP6_Amon.json'
+      tramon        = 'CMIP6_RAMIPmon.json'
       taero         = 'CMIP6_aero.json'
       tlmon         = 'CMIP6_Lmon.json'
       tlimon        = 'CMIP6_LImon.json'
@@ -846,6 +848,10 @@ c
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
      .  'WARNING: Table Amon not in namelist file. Skipping table...'
+      READ(funit,nml=table_ramon,IOSTAT=istatus)
+      REWIND(funit)
+      IF (istatus.NE.0) WRITE(*,*) 
+     .  'WARNING: Table RAMIPmon not in namelist file. Skipping table..'
       READ(funit,nml=table_aero,IOSTAT=istatus)
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
