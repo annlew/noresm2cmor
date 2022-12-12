@@ -574,7 +574,7 @@
                  'cVegShrub          ','cVegShrub                                   ','          ',
                  'cVegTree           ','cVegTree                                    ','          ',
                  'cWood              ','LIVESTEMC+DEADSTEMC                         ','kg m-2    ',
-                 'cldnvi             ','CDNCINT                                     ','fochana;m-2',
+                 'cldnvi             ','CDNUMC                                      ','fochana;m-2',
                  'climodis           ','CLIMODIS                                    ','          ',
                  'cltmodis           ','CLTMODIS                                    ','          ',
                  'clwmodis           ','CLWMODIS                                    ','          ',
