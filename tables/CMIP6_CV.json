@@ -2563,6 +2563,7 @@
             "AERmon",
             "AERmonZ",
             "Amon",
+            "RAMIPmon",
             "CF3hr",
             "CFday",
             "CFmon",
@@ -9944,7 +9945,7 @@
                 "description":"SSP3-7.0 anthropogenic emissions",
                 "end_year":"2051",
                 "experiment":"SSP3-7.0 forcing",
-                "experiment_id":"ssp370-126aer",
+                "experiment_id":"ssp370-ramip",
                 "min_number_yrs_per_sim":"37",
                 "parent_activity_id":[
                     "CMIP"

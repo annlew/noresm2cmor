@@ -13,6 +13,7 @@
         "mip_era": "CMIP6", 
         "Conventions": "CF-1.7 CMIP-6.2"
     }, 
+    "variable_entry": {
         "chepnh4": {
             "frequency": "mon", 
             "modeling_realm": "aerosol", 
@@ -265,4 +266,5 @@
             "ok_min_mean_abs": "", 
             "ok_max_mean_abs": ""
         }
+    }
 }

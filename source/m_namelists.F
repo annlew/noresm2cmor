@@ -100,7 +100,7 @@ c --- Experiment namelist
       LOGICAL, SAVE :: dry_run,plevdummy,readdummy,add_fill_day,
      .  do_fx,do_oyr,do_oyrbgc,do_amon,do_omon,do_omonbgc,do_oimon,
      .  do_lmon,do_limon,do_aero,do_day,do_6hrlev,do_6hrlevi,do_6hrplev,
-
+     .  do_ramon,  
      .  do_3hr,do_3hri,do_2d,do_3d,do_xd,do_bgc,
      .  newcolumnorder,scanallfiles
       INTEGER, SAVE :: 
@@ -155,6 +155,7 @@ c --- Experiment namelist
      .  monthn,
      .  do_fx, ! hidden
      .  do_amon, ! hidden
+     .  do_ramon, ! hidden
      .  do_oyr, ! hidden
      .  do_oyrbgc, ! hidden
      .  do_omon, ! hidden
@@ -400,6 +401,7 @@ c --- Initialise namelist variables
       do_omonbgc    = .TRUE.
       do_oimon      = .TRUE.
       do_amon       = .TRUE.
+      do_ramon      = .TRUE.
       do_aero       = .TRUE.
       do_lmon       = .TRUE.
       do_limon      = .TRUE.
@@ -475,6 +477,7 @@ c
       domonbgc      = .FALSE. 
       doimon        = .FALSE. 
       damon         = .FALSE. 
+      dramon        = .FALSE. 
       daero         = .FALSE. 
       dlmon         = .FALSE. 
       dlimon        = .FALSE. 
@@ -521,6 +524,7 @@ c
       vomonbgc      = ' '
       voimon        = ' '
       vamon         = ' '
+      vramon         = ' '
       vaero         = ' ' 
       vlmon         = ' ' 
       vlimon        = ' ' 
@@ -567,6 +571,7 @@ c
       pomonbgc      = ' '
       poimon        = ' '
       pamon         = ' '
+      pramon        = ' '
       paero         = ' '
       plmon         = ' '
       plimon        = ' '
@@ -612,6 +617,7 @@ c
       romonbgc      = 1000000
       roimon        = 1000000
       ramon         = 1000000
+      rramon        = 1000000
       raero         = 1000000
       rlmon         = 1000000
       rlimon        = 1000000
@@ -851,7 +857,7 @@ c
       READ(funit,nml=table_ramon,IOSTAT=istatus)
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
-     .  'WARNING: Table RAMIPmon not in namelist file. Skipping table..'
+     . 'WARNING: Table RAMIPmon not in namelist file. Skipping table...'
       READ(funit,nml=table_aero,IOSTAT=istatus)
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
@@ -1049,6 +1055,7 @@ c --- Count number of table entries
       nomonbgc=0  
       noimon=0  
       namon=0  
+      nramon=0  
       naero=0   
       nlmon=0   
       nlimon=0   
@@ -1066,6 +1073,7 @@ c --- Count number of table entries
         IF (LEN_TRIM(vomonbgc(1,n)).ne.0) nomonbgc=nomonbgc+1 
         IF (LEN_TRIM(voimon(1,n)).ne.0) noimon=noimon+1 
         IF (LEN_TRIM(vamon(1,n)).ne.0) namon=namon+1 
+        IF (LEN_TRIM(vramon(1,n)).ne.0) nramon=nramon+1 
         IF (LEN_TRIM(vaero(1,n)).ne.0) naero=naero+1 
         IF (LEN_TRIM(vlmon(1,n)).ne.0) nlmon=nlmon+1 
         IF (LEN_TRIM(vlimon(1,n)).ne.0) nlimon=nlimon+1 
@@ -1088,6 +1096,7 @@ c --- Count number of table entries
      .      vomonbgc(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(voimon(po,n))) voimon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vamon(po,n))) vamon(pi,n)='SKIP'
+          IF (TRIM(vsingle).NE.TRIM(vramon(po,n))) vramon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vaero(po,n))) vaero(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vlmon(po,n))) vlmon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vlimon(po,n))) vlimon(pi,n)='SKIP'
@@ -1207,6 +1216,7 @@ c --- Skip deselected namelists
       if (.not.do_omonbgc.or..not.do_bgc) nomonbgc=0   
       if (.not.do_oimon)   noimon=0   
       if (.not.do_amon)    namon=0   
+      if (.not.do_ramon)   nramon=0   
       if (.not.do_aero)    naero=0   
       if (.not.do_lmon)    nlmon=0   
       if (.not.do_limon)   nlimon=0   
@@ -1378,6 +1388,12 @@ c
       WRITE(*,*) 'Table amon:'
       DO n=1,namon
         WRITE(*,'(1X,A20,A20,A20)') vamon(:,n)
+      ENDDO
+c
+      WRITE(*,*) 
+      WRITE(*,*) 'Table RAMIPmon:'
+      DO n=1,nramon
+        WRITE(*,'(1X,A20,A20,A20)') vramon(:,n)
       ENDDO
 c
       WRITE(*,*) 

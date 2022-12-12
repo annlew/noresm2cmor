@@ -450,6 +450,19 @@
                  'wap              ','OMEGA                ','          ',
                  'zg               ','Z3                   ','          ',
 /
+&table_RAMIPmon
+ dramon         = .true.
+ tramon         = 'CMIP6_RAMIPmon.json',
+ rramon         = 1000000,
+ vramon         =
+                 'mmrbcs           ','BC_N_SRF+BC_AX_SRF+BC_NI_SRF+BC_A_SRF+BC_AI_SRF+BC_AC_SRF','          ',
+                 'mmrdusts         ','DST_A2_SRF+DST_A3_SRF       ','          ',
+                 'mmroas           ','OM_NI_SRF+OM_AI_SRF+OM_AC_SRF','          ',
+                 'mmrpm2p5s        ','MMRPM2P5_SRF   ','           ',
+                 'mmrso4s          ','SO4_NA_SRF+SO4_A1_SRF+SO4_A2_SRF+SO4_AC_SRF+SO4_PR_SRF','           ',
+                 'mmrsoas          ','SOA_NA_SRF+SOA_A1_SRF','           ',
+                 'mmrsss           ','SS_A1_SRF+SS_A2_SRF+SS_A3_SRF','           ',
+/
 
 &table_aero
  daero         = .true.

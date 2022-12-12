@@ -451,11 +451,12 @@
                  'wap              ','OMEGA                ','          ',
                  'zg               ','Z3                   ','          ',
 /
-&table_RAMIPamon
- damon         = .true.
- tamon         = 'CMIP6_RAMIPAmon.json',
- ramon         = 1000000,
- vamon         =
+
+&table_ramon
+ dramon         = .true.
+ tramon         = 'CMIP6_RAMIPmon.json',
+ rramon         = 1000000,
+ vramon         =
                  'mmrbcs           ','BC_N_SRF+BC_AX_SRF+BC_NI_SRF+BC_A_SRF+BC_AI_SRF+BC_AC_SRF','          ',
                  'mmrdusts         ','DST_A2_SRF+DST_A3_SRF       ','          ',
                  'mmroas           ','OM_NI_SRF+OM_AI_SRF+OM_AC_SRF','          ',
