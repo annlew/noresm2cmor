@@ -528,7 +528,7 @@
                  'pfull        ','PS                        ','ps2pfull  ',
                  'phalf        ','PS                        ','ps2phalf  ',
                  'ps           ','PS                        ','          ',
-                 'reffclwtop   ','REFFCLWMODIS/CLWMODIS     ','Dfield2   ',
+                 'reffclwtop   ','ACTREL/FCTL               ','Dfield2;micrometer   ',
                  'rlutaf       ','FLNT_DRF                  ','positiveup',
                  'rlutcsaf     ','FLNTCDRF                  ','positiveup',
                  'rsutaf       ','FSNT_DRF                  ','positiveup',
@@ -575,7 +575,6 @@
                  'cVegShrub          ','cVegShrub                                   ','          ',
                  'cVegTree           ','cVegTree                                    ','          ',
                  'cWood              ','LIVESTEMC+DEADSTEMC                         ','kg m-2    ',
-                 'cldnvi             ','CDNUMC                                      ','fochana;m-2',
                  'climodis           ','CLIMODIS                                    ','          ',
                  'cltmodis           ','CLTMODIS                                    ','          ',
                  'clwmodis           ','CLWMODIS                                    ','          ',
@@ -690,6 +689,7 @@
 !               'vegHeightGrass     ','vegHeightGrass                               ','          ',
 !               'vegHeightShrub     ','vegHeightShrub                               ','          ',
 !               'vegHeightTree      ','vegHeightTree                                ','          ',
+!                 'cldnvi             ','CDNUMC                                      ','fochana;m-2',
 /
 
 &table_EmonZ
