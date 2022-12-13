@@ -476,6 +476,7 @@
                  'bldep        ','PBLH                      ','          ',
                  'ccn          ','CCN_B/FCTL_B              ','Dfield2   ',
                  'cdnc         ','AWNC/FREQL                ','Dfield2   ',
+                 'cheaqpso4    ','AQSO4_H2O2+AQSO4_O3       ','          ',
                  'chepsoa      ','GS_SOA_LV+GS_SOA_SV       ','          ',
                  'co2          ','CO2                       ','co2units  ',
                  'cod          ','TAUTMODIS/CLTMODIS        ','unitless;Dfield2 ',
