@@ -100,7 +100,7 @@ c --- Experiment namelist
       LOGICAL, SAVE :: dry_run,plevdummy,readdummy,add_fill_day,
      .  do_fx,do_oyr,do_oyrbgc,do_amon,do_omon,do_omonbgc,do_oimon,
      .  do_lmon,do_limon,do_aero,do_day,do_6hrlev,do_6hrlevi,do_6hrplev,
-     .  do_ramon,  
+     .  do_ramon,do_RAMIPday,  
      .  do_3hr,do_3hri,do_2d,do_3d,do_xd,do_bgc,
      .  newcolumnorder,scanallfiles
       INTEGER, SAVE :: 
@@ -156,6 +156,7 @@ c --- Experiment namelist
      .  do_fx, ! hidden
      .  do_amon, ! hidden
      .  do_ramon, ! hidden
+     .  do_RAMIPday, ! hidden
      .  do_oyr, ! hidden
      .  do_oyrbgc, ! hidden
      .  do_omon, ! hidden
@@ -219,27 +220,30 @@ c
 c --- Tables 
       LOGICAL, SAVE :: 
      .  dfx,damon,domon,doimon,daero,dday,d6hrlev,d6hrlevi,d6hrplev,
-     .  d3hr,d3hri,dlmon,dlimon,doyr,doyrbgc,domonbgc,dramon
+     .  d3hr,d3hri,dlmon,dlimon,doyr,doyrbgc,domonbgc,dramon,dRAMIPday
       CHARACTER(len=lenmax),DIMENSION(colmax,rowmax), SAVE :: 
      .  vfx,vamon,vomon,voimon,vaero,vday,v6hrlev,v6hrlevi,v6hrplev,
-     .  v3hr,v3hri,vlmon,vlimon,voyr,voyrbgc,vomonbgc,vramon
+     .  v3hr,v3hri,vlmon,vlimon,voyr,voyrbgc,vomonbgc,vramon,vRAMIPday
       CHARACTER(len=slenmax), SAVE ::
      .  pfx,pamon,pomon,poimon,paero,pday,p6hrlev,p6hrlevi,p6hrplev,
-     .  p3hr,p3hri,plmon,plimon,poyr,poyrbgc,pomonbgc,pramon
+     .  p3hr,p3hri,plmon,plimon,poyr,poyrbgc,pomonbgc,pramon,pRAMIPday
       CHARACTER(len=slenmax), SAVE ::
      .  tfx,tamon,tomon,toimon,taero,tday,t6hrlev,t6hrlevi,t6hrplev,
-     .  t3hr,t3hri,tlmon,tlimon,toyr,toyrbgc,tomonbgc,tgrids,tramon
+     .  t3hr,t3hri,tlmon,tlimon,toyr,toyrbgc,tomonbgc,tgrids,tramon,
+     .  tRAMIPday
       INTEGER, SAVE :: 
      .  nfx,namon,nomon,noimon,naero,nday,n6hrlev,n6hrlevi,n6hrplev,
-     .  n3hr,n3hri,nlmon,nlimon,noyr,noyrbgc,nomonbgc,nramon
+     .  n3hr,n3hri,nlmon,nlimon,noyr,noyrbgc,nomonbgc,nramon,nRAMIPday
       INTEGER, SAVE :: 
      .  rfx,ramon,romon,roimon,raero,rday,r6hrlev,r6hrlevi,r6hrplev,
      .  r3hr,r3hri,
-     .  rlmon,rlimon,royr,royrbgc,romonbgc,rramon
+     .  rlmon,rlimon,royr,royrbgc,romonbgc,rramon,rRAMIPday
       NAMELIST /table_grids/   tgrids
       NAMELIST /table_fx/      dfx,pfx,tfx,vfx
       NAMELIST /table_amon/    damon,pamon,tamon,ramon,vamon
       NAMELIST /table_ramon/   dramon,pramon,tramon,rramon,vramon
+      NAMELIST /table_RAMIPday/ dRAMIPday,pRAMIPday,tRAMIPday,rRAMIPday,
+     .                         vRAMIPday
       NAMELIST /table_aero/    daero,paero,taero,raero,vaero
       NAMELIST /table_oyr/     doyr,poyr,toyr,royr,voyr
       NAMELIST /table_oyrbgc/  doyrbgc,poyrbgc,toyrbgc,royrbgc,voyrbgc
@@ -402,6 +406,7 @@ c --- Initialise namelist variables
       do_oimon      = .TRUE.
       do_amon       = .TRUE.
       do_ramon      = .TRUE.
+      do_RAMIPday   = .TRUE.
       do_aero       = .TRUE.
       do_lmon       = .TRUE.
       do_limon      = .TRUE.
@@ -478,6 +483,7 @@ c
       doimon        = .FALSE. 
       damon         = .FALSE. 
       dramon        = .FALSE. 
+      dRAMIPday     = .FALSE. 
       daero         = .FALSE. 
       dlmon         = .FALSE. 
       dlimon        = .FALSE. 
@@ -524,7 +530,8 @@ c
       vomonbgc      = ' '
       voimon        = ' '
       vamon         = ' '
-      vramon         = ' '
+      vramon        = ' '
+      vRAMIPday     = ' '
       vaero         = ' ' 
       vlmon         = ' ' 
       vlimon        = ' ' 
@@ -572,6 +579,7 @@ c
       poimon        = ' '
       pamon         = ' '
       pramon        = ' '
+      pRAMIPday     = ' '
       paero         = ' '
       plmon         = ' '
       plimon        = ' '
@@ -618,6 +626,7 @@ c
       roimon        = 1000000
       ramon         = 1000000
       rramon        = 1000000
+      rRAMIPday     = 1000000
       raero         = 1000000
       rlmon         = 1000000
       rlimon        = 1000000
@@ -685,6 +694,7 @@ c
       toimon        = 'CMIP6_OImon.json'
       tamon         = 'CMIP6_Amon.json'
       tramon        = 'CMIP6_RAMIPmon.json'
+      tRAMIPday     = 'CMIP6_RAMIPday.json'
       taero         = 'CMIP6_aero.json'
       tlmon         = 'CMIP6_Lmon.json'
       tlimon        = 'CMIP6_LImon.json'
@@ -858,6 +868,10 @@ c
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
      . 'WARNING: Table RAMIPmon not in namelist file. Skipping table...'
+      READ(funit,nml=table_RAMIPday,IOSTAT=istatus)
+      REWIND(funit)
+      IF (istatus.NE.0) WRITE(*,*) 
+     . 'WARNING: Table RAMIPday not in namelist file. Skipping table...'
       READ(funit,nml=table_aero,IOSTAT=istatus)
       REWIND(funit)
       IF (istatus.NE.0) WRITE(*,*) 
@@ -1056,6 +1070,7 @@ c --- Count number of table entries
       noimon=0  
       namon=0  
       nramon=0  
+      nRAMIPday=0  
       naero=0   
       nlmon=0   
       nlimon=0   
@@ -1074,6 +1089,7 @@ c --- Count number of table entries
         IF (LEN_TRIM(voimon(1,n)).ne.0) noimon=noimon+1 
         IF (LEN_TRIM(vamon(1,n)).ne.0) namon=namon+1 
         IF (LEN_TRIM(vramon(1,n)).ne.0) nramon=nramon+1 
+        IF (LEN_TRIM(vRAMIPday(1,n)).ne.0) nRAMIPday=nRAMIPday+1 
         IF (LEN_TRIM(vaero(1,n)).ne.0) naero=naero+1 
         IF (LEN_TRIM(vlmon(1,n)).ne.0) nlmon=nlmon+1 
         IF (LEN_TRIM(vlimon(1,n)).ne.0) nlimon=nlimon+1 
@@ -1097,6 +1113,8 @@ c --- Count number of table entries
           IF (TRIM(vsingle).NE.TRIM(voimon(po,n))) voimon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vamon(po,n))) vamon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vramon(po,n))) vramon(pi,n)='SKIP'
+          IF (TRIM(vsingle).NE.TRIM(vRAMIPday(po,n)))
+     .      vRAMIPday(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vaero(po,n))) vaero(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vlmon(po,n))) vlmon(pi,n)='SKIP'
           IF (TRIM(vsingle).NE.TRIM(vlimon(po,n))) vlimon(pi,n)='SKIP'
@@ -1217,6 +1235,7 @@ c --- Skip deselected namelists
       if (.not.do_oimon)   noimon=0   
       if (.not.do_amon)    namon=0   
       if (.not.do_ramon)   nramon=0   
+      if (.not.do_RAMIPday)nRAMIPday=0   
       if (.not.do_aero)    naero=0   
       if (.not.do_lmon)    nlmon=0   
       if (.not.do_limon)   nlimon=0   
@@ -1394,6 +1413,12 @@ c
       WRITE(*,*) 'Table RAMIPmon:'
       DO n=1,nramon
         WRITE(*,'(1X,A20,A20,A20)') vramon(:,n)
+      ENDDO
+c
+      WRITE(*,*) 
+      WRITE(*,*) 'Table RAMIPday:'
+      DO n=1,nRAMIPday
+        WRITE(*,'(1X,A20,A20,A20)') vRAMIPday(:,n)
       ENDDO
 c
       WRITE(*,*) 

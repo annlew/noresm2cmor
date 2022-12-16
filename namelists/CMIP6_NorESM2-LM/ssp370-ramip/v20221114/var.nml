@@ -828,10 +828,10 @@
 /
 
 &table_RAMIPday
- dday          = .true.
- tday          = 'CMIP6_RAMIPday.json',
- rday          = 1000000,
- vday          =
+ dRAMIPday      = .true.
+ tRAMIPday      = 'CMIP6_RAMIPday.json',
+ rRAMIPday      = 1000000,
+ vRAMIPday      =
                  'hus3      ','Q                 ','          ',
                  'mmrbcs    ','BC_N_SRF+BC_AX_SRF+BC_NI_SRF+BC_A_SRF+BC_AI_SRF+BC_AC_SRF','  ',
                  'mmrdusts  ','DST_A2_SRF+DST_A3_SRF','       ',
@@ -839,8 +839,12 @@
                  'mmrso4s   ','SO4_NA_SRF+SO4_A1_SRF+SO4_A2_SRF+SO4_AC_SRF+SO4_PR_SRF',' ',
                  'mmrsss    ','SS_A1_SRF+SS_A2_SRF+SS_A3_SRF  ',' ',
                  'mmrsoas   ','SOA_NA_SRF+SOA_A1_SRF','           ',
-                 'ua3       ','U                 ','          ',
-                 'va3       ','V                 ','          ',
+                 'ua3       ','U250              ','          ',
+                 'ua3       ','U500              ','          ',
+                 'ua3       ','U850              ','          ',
+                 'va3       ','V250              ','          ',
+                 'va3       ','V500              ','          ',
+                 'va3       ','V850              ','          ',
 /
 
 &table_SIday
